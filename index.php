@@ -44,16 +44,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-md-3">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">CEP</span>
                     </div>
                     <input type="number" class="form-control thisIsRetrieveableContent" aria-label="Default"
                         aria-describedby="inputGroup-sizing-default" id="cep">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">ou</span>
-                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-3">
+                <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">Endereço</span>
                     </div>
@@ -61,7 +62,7 @@
                         aria-describedby="inputGroup-sizing-default" id="endereco">
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <select class="form-select thisIsRetrieveableContent" aria-label="Default select example" id="cnae">
                     <option selected value="">Selecione uma opção</option>
                     <option value="4530703">Comércio a varejo de peças e acessórios novos para veículos automotores
@@ -69,6 +70,11 @@
                 </select>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">hCaptcha goes here</div>
+        </div>
+
         <div class="row mt-3 mb-3">
             <div class="col-12 d-flex justify-content-center">
                 <button class="btn btn-primary" onclick="getRes()">Pesquisar</button>
@@ -76,11 +82,11 @@
         </div>
 
         <div class="row">
-            <div class="col-12 border rounded" id="contentGoesHere"></div>
+            <div class="col-12 border rounded d-flex justify-content-center" id="contentGoesHere">content goes here</div>
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="col-12 border rounded" id="adGoesHere"></div>
+                <div class="col-12 border rounded d-flex justify-content-center" id="adGoesHere">ad goes here</div>
             </div>
         </div>
     </div>
@@ -88,8 +94,21 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script>
+        function getCurrentURL() {
+                let protocol = window.location.protocol;
+                let domain =window.location.hostname;
+                if(window.location.port !== '') {
+                    let port = window.location.port;
+                    return `${protocol}//${domain}:${port}/`;
+                }
+
+                return `${protocol}//${domain}/`;
+            }
+
         function getCNAEs() {
-            url = 'http://localhost:1234/mockdapi.php';
+
+            const url = getCurrentURL() + "mockdapi.php";
+
             fetch(url)
                 .then(res => res.json())
                 .then(data => {
@@ -118,8 +137,9 @@
             });
             return sendToAPI;
         }
+
         function getRes() {
-            const url = 'http://localhost:1234/mockdapiactualres.php';
+            const url = getCurrentURL() + 'mockdapiactualres.php';
             const data = getContent();
             fetch(url, {
                 method: 'POST',
