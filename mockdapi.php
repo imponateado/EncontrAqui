@@ -1,5 +1,7 @@
 <?php
 
+header('Content-Type: application/json');
+
 $content = [
     ['cnaeID' => '200',
     'cnaeDesc' => 'teste'],

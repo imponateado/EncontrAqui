@@ -107,7 +107,7 @@
 
         function getCNAEs() {
 
-            const url = getCurrentURL() + "mockdapi.php";
+            const url = getCurrentURL() + "cnaes.php";
 
             fetch(url)
                 .then(res => res.json())
